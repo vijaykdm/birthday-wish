@@ -71,7 +71,7 @@
       position: absolute;
       top: -10px;
       animation: fall 4s linear infinite;
-      transform: rotate(45deg);
+      transform: rotate(15deg);
     }
 
     .heart::before, .heart::after {
@@ -140,6 +140,105 @@
     #main-content {
       display: none;
     }
+	
+	.modal {
+  display: none; /* hidden by default */
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 192, 203, 0.8); /* pinkish overlay */
+  backdrop-filter: blur(5px);
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 224, 236, 0.9);
+  backdrop-filter: blur(5px);
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  background-color: transparent;
+  border-radius: 20px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.modal-content h1 {
+  font-size: 6em;
+  color: #ffca28; /* yellow */
+  font-family: 'Great Vibes', cursive;
+  animation: pop 1s ease-in-out infinite;
+  position: relative;
+  z-index: 2;
+  margin-top: 80px;
+}
+
+/* Container inside the modal for yellow hearts */
+.heart-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Yellow hearts */
+.yellow-heart {
+  width: 15px;
+  height: 15px;
+  background: #ffeb3b;
+  position: absolute;
+  top: -20px;
+  transform: rotate(15deg);
+  animation: fallHeart 4s linear infinite;
+}
+
+.yellow-heart::before,
+.yellow-heart::after {
+  content: '';
+  width: 15px;
+  height: 15px;
+  background: #ffeb3b;
+  position: absolute;
+  border-radius: 50%;
+}
+
+.yellow-heart::before {
+  top: -7px;
+  left: 0;
+}
+
+.yellow-heart::after {
+  left: 7px;
+  top: 0;
+}
+
+@keyframes fallHeart {
+  to {
+    transform: translateY(300px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -152,6 +251,17 @@
 
 <!-- ❤️ Heart Animation -->
 <div class="hearts" id="hearts-container"></div>
+
+<!-- ⏳ Countdown Screen -->
+<div id="countdown-screen" class="modal">
+  <div class="modal-content">
+    <div class="heart-box" id="countdown-hearts"></div>
+    <h1 id="countdown-number">3</h1>
+  </div>
+</div>
+
+
+
 
 <!-- 🎉 Main Content -->
 <div id="main-content">
@@ -201,13 +311,49 @@
 <script>
   // 🎬 Start Button
   document.getElementById("start-button").addEventListener("click", function () {
-    document.getElementById("welcome-screen").style.display = "none";
-    document.getElementById("main-content").style.display = "block";
-    document.getElementById("bg-music").play();
-    startHearts();
-    startCountdown();
-    showSlides();
-  });
+  document.getElementById("countdown-screen").style.display = "flex";
+  document.getElementById("welcome-screen").style.display = "none";
+  document.getElementById("countdown-screen").style.display = "flex";
+  startCountdownHearts();
+
+  startHearts(); // Hearts start immediately
+  
+  function startCountdownHearts() {
+  const container = document.getElementById("countdown-hearts");
+
+  function createYellowHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('yellow-heart');
+    heart.style.left = Math.random() * 90 + "%";
+    heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+    container.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+  }
+
+  setInterval(createYellowHeart, 200);
+  }
+
+  let count = 3;
+  const countdownEl = document.getElementById("countdown-number");
+  countdownEl.textContent = count;
+
+  const countdownInterval = setInterval(() => {
+    count--;
+    if (count > 0) {
+      countdownEl.textContent = count;
+    } else {
+      clearInterval(countdownInterval);
+      // Hide countdown, show main content
+      document.getElementById("countdown-screen").style.display = "none";
+      document.getElementById("main-content").style.display = "block";
+      document.getElementById("bg-music").play();
+      startCountdown();
+      showSlides();
+    }
+  }, 1000);
+});
+
+
 
   // 🖼️ Slideshow Logic (3 seconds per image)
   let slideIndex = 0;
