@@ -165,14 +165,14 @@
     I can’t wait to celebrate many more birthdays by your side.
   </p>
   <p style="
-  font-size: 1.6em;
+  font-size: 1.8em;
   font-weight: bold;
   color: #fdd835; /* Fill color */
   -webkit-text-stroke: 0.1px black; /* Black text border */
   text-stroke: 0.1px black; /* Fallback for some browsers */
   margin-top: 20px;
 ">
-  💛 Happy Birthday Chlm 😘
+  💛 Happy Birthday Chlm 😘 Love You Pondatti 💛
 </p>
 
 
@@ -205,7 +205,7 @@
     document.getElementById("main-content").style.display = "block";
     document.getElementById("bg-music").play();
     startHearts();
-    showCountdown();
+    startCountdown();
     showSlides();
   });
 
@@ -237,20 +237,34 @@
   }
 
   // 🗓️ Countdown
-  function showCountdown() {
+  function startCountdown() {
     const countdownText = document.getElementById("countdown-text");
     const birthdayDate = new Date("2025-05-26T00:00:00");
-    const now = new Date();
-    const timeDiff = birthdayDate - now;
-    const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-    if (daysLeft > 0) {
-      countdownText.textContent = `🎈 ${daysLeft} day${daysLeft > 1 ? 's' : ''} to go until your birthday!`;
-    } else if (daysLeft === 0) {
-      countdownText.textContent = `🎉 It's your Birthday, Kaviya! 💖`;
-    } else {
-      countdownText.textContent = `🎂 Hope you had a magical birthday, Kaviya!`;
+
+    function updateCountdown() {
+      const now = new Date();
+      const timeDiff = birthdayDate - now;
+
+      if (timeDiff > 0) {
+        const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+        countdownText.textContent =
+          `⏳ ${days}d ${hours}h ${minutes}m ${seconds}s left until your birthday!`;
+      } else if (timeDiff <= 0 && now.getDate() === 26 && now.getMonth() === 4) {
+        countdownText.textContent = `🎉 It's your Birthday, Kaviya! 💖`;
+      } else {
+        countdownText.textContent = `🎂 Hope you had a magical birthday, Kaviya!`;
+      }
     }
+
+    updateCountdown(); // call immediately
+    setInterval(updateCountdown, 1000); // update every second
   }
+</script>
+
 </script>
 
 </body>
