@@ -140,119 +140,105 @@
     #main-content {
       display: none;
     }
-	
-	.modal {
-  display: none; /* hidden by default */
-  position: fixed;
-  z-index: 9999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 192, 203, 0.8); /* pinkish overlay */
-  backdrop-filter: blur(5px);
-  justify-content: center;
-  align-items: center;
-  animation: fadeIn 0.3s ease-in-out;
-}
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 224, 236, 0.9);
-  backdrop-filter: blur(5px);
-  justify-content: center;
-  align-items: center;
-  animation: fadeIn 0.3s ease-in-out;
-}
 
-.modal-content {
-  position: relative;
-  width: 300px;
-  height: 300px;
-  background-color: transparent;
-  border-radius: 20px;
-  text-align: center;
-  overflow: hidden;
-}
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 224, 236, 0.9);
+      backdrop-filter: blur(5px);
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.3s ease-in-out;
+    }
 
-.modal-content h1 {
-  font-size: 6em;
-  color: #ffca28; /* yellow */
-  font-family: 'Great Vibes', cursive;
-  animation: pop 1s ease-in-out infinite;
-  position: relative;
-  z-index: 2;
-  margin-top: 80px;
-}
+    .modal-content {
+      position: relative;
+      width: 500px;
+      height: 500px;
+      background-color: transparent;
+      border-radius: 20px;
+      text-align: center;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-/* Container inside the modal for yellow hearts */
-.heart-box {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-}
+    .modal-content h1 {
+      font-size: 10em;
+      color: #ffca28;
+      font-family: 'Great Vibes', cursive;
+      animation: pop 1s ease-in-out infinite;
+      z-index: 2;
+    }
 
-/* Yellow hearts */
-.yellow-heart {
-  width: 15px;
-  height: 15px;
-  background: #ffeb3b;
-  position: absolute;
-  top: -20px;
-  transform: rotate(15deg);
-  animation: fallHeart 4s linear infinite;
-}
+    .heart-box {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
 
-.yellow-heart::before,
-.yellow-heart::after {
-  content: '';
-  width: 15px;
-  height: 15px;
-  background: #ffeb3b;
-  position: absolute;
-  border-radius: 50%;
-}
+    .yellow-heart {
+      width: 25px;
+      height: 25px;
+      background: #ffeb3b;
+      position: absolute;
+      top: -20px;
+      transform: rotate(15deg);
+      animation: fallHeart 4s linear infinite;
+    }
 
-.yellow-heart::before {
-  top: -7px;
-  left: 0;
-}
+    .yellow-heart::before,
+    .yellow-heart::after {
+      content: '';
+      width: 25px;
+      height: 25px;
+      background: #ffeb3b;
+      position: absolute;
+      border-radius: 50%;
+    }
 
-.yellow-heart::after {
-  left: 7px;
-  top: 0;
-}
+    .yellow-heart::before {
+      top: -10px;
+      left: 0;
+    }
 
-@keyframes fallHeart {
-  to {
-    transform: translateY(300px) rotate(360deg);
-    opacity: 0;
-  }
-}
+    .yellow-heart::after {
+      left: 10px;
+      top: 0;
+    }
 
+    @keyframes fallHeart {
+      to {
+        transform: translateY(500px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes pop {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
   </style>
 </head>
 <body>
 
-<!-- 🎬 Welcome Screen -->
 <div id="welcome-screen">
   <h2>Hi Kaviya! 💖<br>Click me to open your surprise 🎁</h2>
   <button id="start-button">💝 Open</button>
 </div>
 
-<!-- ❤️ Heart Animation -->
 <div class="hearts" id="hearts-container"></div>
 
-<!-- ⏳ Countdown Screen -->
 <div id="countdown-screen" class="modal">
   <div class="modal-content">
     <div class="heart-box" id="countdown-hearts"></div>
@@ -260,34 +246,22 @@
   </div>
 </div>
 
-
-
-
-<!-- 🎉 Main Content -->
 <div id="main-content">
   <h1>Happy Birthday, Kaviya 🎂</h1>
   <div class="countdown" id="countdown-text"></div>
   <div class="message">
-  <p>
-    <strong>Happy Birthday to the love of my life.</strong><br />
-    Every moment with you is a beautiful memory in the making.<br />
-    Thank you for filling my world with laughter, love, and light.<br />
-    I can’t wait to celebrate many more birthdays by your side.
-  </p>
-  <p style="
-  font-size: 1.8em;
-  font-weight: bold;
-  color: #fdd835; /* Fill color */
-  -webkit-text-stroke: 0.1px black; /* Black text border */
-  text-stroke: 0.1px black; /* Fallback for some browsers */
-  margin-top: 20px;
-">
-  💛 Happy Birthday Chlm 😘 Love You Pondatti 💛
-</p>
-
-
-</div>
-
+    <p>
+      💖<strong>Happy Birthday to the love of my life.</strong><br />
+      Every moment with you is magic ✨<br>
+      You are the sunshine of my life ☀️<br>
+      I’m so lucky to call you mine 💍<br>
+      Thank you for filling my world with laughter, love, and light.<br />
+      I can’t wait to celebrate many more birthdays by your side.
+    </p>
+    <p style="font-size: 1.8em; font-weight: bold; color: #fdd835; -webkit-text-stroke: 0.1px black;">
+        💛 Love You Pondatti 💛
+    </p>
+  </div>
 
   <div class="slideshow-container">
     <img class="slides" src="images/photo1.jpg" />
@@ -303,72 +277,51 @@
   </div>
 </div>
 
-<!-- 🔊 Hidden Music -->
 <audio id="bg-music" autoplay loop>
   <source src="music/happy.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-  // 🎬 Start Button
   document.getElementById("start-button").addEventListener("click", function () {
-  document.getElementById("countdown-screen").style.display = "flex";
-  document.getElementById("welcome-screen").style.display = "none";
-  document.getElementById("countdown-screen").style.display = "flex";
-  startCountdownHearts();
+    document.getElementById("countdown-screen").style.display = "flex";
+    document.getElementById("welcome-screen").style.display = "none";
+    startCountdownHearts();
+    startHearts();
 
-  startHearts(); // Hearts start immediately
-  
+    let count = 3;
+    const countdownEl = document.getElementById("countdown-number");
+    countdownEl.textContent = count;
+
+    const countdownInterval = setInterval(() => {
+      count--;
+      if (count > 0) {
+        countdownEl.textContent = count;
+      } else {
+        clearInterval(countdownInterval);
+        document.getElementById("countdown-screen").style.display = "none";
+        document.getElementById("main-content").style.display = "block";
+        document.getElementById("bg-music").play();
+        startCountdown();
+        showSlides();
+      }
+    }, 1000);
+  });
+
   function startCountdownHearts() {
-  const container = document.getElementById("countdown-hearts");
+    const container = document.getElementById("countdown-hearts");
 
-  function createYellowHeart() {
-    const heart = document.createElement('div');
-    heart.classList.add('yellow-heart');
-    heart.style.left = Math.random() * 90 + "%";
-    heart.style.animationDuration = Math.random() * 2 + 3 + "s";
-    container.appendChild(heart);
-    setTimeout(() => heart.remove(), 5000);
-  }
-
-  setInterval(createYellowHeart, 200);
-  }
-
-  let count = 3;
-  const countdownEl = document.getElementById("countdown-number");
-  countdownEl.textContent = count;
-
-  const countdownInterval = setInterval(() => {
-    count--;
-    if (count > 0) {
-      countdownEl.textContent = count;
-    } else {
-      clearInterval(countdownInterval);
-      // Hide countdown, show main content
-      document.getElementById("countdown-screen").style.display = "none";
-      document.getElementById("main-content").style.display = "block";
-      document.getElementById("bg-music").play();
-      startCountdown();
-      showSlides();
+    function createYellowHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('yellow-heart');
+      heart.style.left = Math.random() * 90 + "%";
+      heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+      container.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
     }
-  }, 1000);
-});
 
-
-
-  // 🖼️ Slideshow Logic (3 seconds per image)
-  let slideIndex = 0;
-  const slides = document.getElementsByClassName("slides");
-  function showSlides() {
-    for (let i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-    }
-    slideIndex++;
-    if (slideIndex > slides.length) slideIndex = 1;
-    slides[slideIndex - 1].style.display = "block";
-    setTimeout(showSlides, 3000); // 3 seconds
+    setInterval(createYellowHeart, 200);
   }
 
-  // 💖 Falling Hearts
   function startHearts() {
     const container = document.getElementById("hearts-container");
     function createHeart() {
@@ -382,7 +335,22 @@
     setInterval(createHeart, 300);
   }
 
-  // 🗓️ Countdown
+  function showSlides() {
+    let slideIndex = 0;
+    const slides = document.getElementsByClassName("slides");
+
+    function displayNext() {
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      slideIndex = (slideIndex + 1) % slides.length;
+      slides[slideIndex].style.display = "block";
+      setTimeout(displayNext, 3000);
+    }
+
+    displayNext();
+  }
+
   function startCountdown() {
     const countdownText = document.getElementById("countdown-text");
     const birthdayDate = new Date("2025-05-26T00:00:00");
@@ -406,11 +374,9 @@
       }
     }
 
-    updateCountdown(); // call immediately
-    setInterval(updateCountdown, 1000); // update every second
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
   }
-</script>
-
 </script>
 
 </body>
