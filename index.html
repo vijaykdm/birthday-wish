@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday Kaviya 🎉</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #ffe6f0, #ffe0ec);
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3em;
+      color: #e91e63;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .countdown {
+      text-align: center;
+      font-size: 1.5em;
+      margin-top: 10px;
+      color: #d81b60;
+      font-weight: bold;
+    }
+
+    .message {
+      text-align: center;
+      padding: 20px;
+      font-size: 1.3em;
+      color: #333;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .slideshow-container {
+      position: relative;
+      max-width: 90%;
+      margin: 40px auto;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .slides {
+      display: none;
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .music {
+      text-align: center;
+      margin: 30px;
+    }
+
+    .hearts {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    .heart {
+      width: 20px;
+      height: 20px;
+      background: red;
+      position: absolute;
+      top: -10px;
+      animation: fall 4s linear infinite;
+      transform: rotate(45deg);
+    }
+
+    .heart::before, .heart::after {
+      content: '';
+      width: 20px;
+      height: 20px;
+      background: red;
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 10px;
+      top: 0;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="hearts" id="hearts-container"></div>
+
+<h1>Happy Birthday, Kaviya 🎂</h1>
+
+<div class="countdown" id="countdown-text">
+  <!-- Countdown will appear here -->
+</div>
+
+<div class="message">
+  To the most beautiful soul, Kaviya,<br />
+  You fill every moment with joy and every day with love.<br />
+  Today, we celebrate the amazing person you are.<br />
+  Wishing you all the happiness in the world! 💖
+</div>
+
+<div class="slideshow-container">
+  <img class="slides" src="images/photo1.jpg" />
+  <img class="slides" src="images/photo2.jpg" />
+  <img class="slides" src="images/photo3.jpg" />
+</div>
+
+<div class="music">
+  <!-- Replace with actual MP3 URL -->
+  <audio controls autoplay loop>
+    <source src="music/happy.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+</div>
+
+<script>
+  // Slideshow Logic
+  let slideIndex = 0;
+  const slides = document.getElementsByClassName("slides");
+  function showSlides() {
+    for (let i = 0; i < slides.length; i++) slides[i].style.display = "none";
+    slideIndex++;
+    if (slideIndex > slides.length) slideIndex = 1;
+    slides[slideIndex - 1].style.display = "block";
+    setTimeout(showSlides, 3000);
+  }
+  showSlides();
+
+  // Heart Animation
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+    document.getElementById('hearts-container').appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+  }
+  setInterval(createHeart, 300);
+
+  // Countdown to May 26
+  const countdownText = document.getElementById("countdown-text");
+  const birthdayDate = new Date("2025-05-26");
+  const
