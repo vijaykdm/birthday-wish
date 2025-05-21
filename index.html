@@ -6,11 +6,11 @@
   <title>Happy Birthday Kaviya 🎉</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins&display=swap" rel="stylesheet">
   <style>
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(to right, #ffe6f0, #ffe0ec);
-      overflow-x: hidden;
     }
 
     h1 {
@@ -49,12 +49,9 @@
     .slides {
       display: none;
       width: 100%;
+      height: auto;
       border-radius: 10px;
-    }
-
-    .music {
-      text-align: center;
-      margin: 30px;
+      object-fit: contain;
     }
 
     .hearts {
@@ -62,6 +59,7 @@
       width: 100%;
       height: 100%;
       top: 0;
+      left: 0;
       pointer-events: none;
       z-index: 999;
     }
@@ -101,64 +99,159 @@
         opacity: 0;
       }
     }
+
+    #welcome-screen {
+      position: fixed;
+      z-index: 10000;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #ffe0ec;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    #welcome-screen h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5em;
+      color: #e91e63;
+      margin-bottom: 20px;
+    }
+
+    #start-button {
+      background-color: #ff4081;
+      border: none;
+      color: white;
+      font-size: 1.2em;
+      padding: 15px 30px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    #start-button:hover {
+      background-color: #e91e63;
+    }
+
+    #main-content {
+      display: none;
+    }
   </style>
 </head>
 <body>
 
+<!-- 🎬 Welcome Screen -->
+<div id="welcome-screen">
+  <h2>Hi Kaviya! 💖<br>Click me to open your surprise 🎁</h2>
+  <button id="start-button">💝 Open</button>
+</div>
+
+<!-- ❤️ Heart Animation -->
 <div class="hearts" id="hearts-container"></div>
 
-<h1>Happy Birthday, Kaviya 🎂</h1>
+<!-- 🎉 Main Content -->
+<div id="main-content">
+  <h1>Happy Birthday, Kaviya 🎂</h1>
+  <div class="countdown" id="countdown-text"></div>
+  <div class="message">
+  <p>
+    <strong>Happy Birthday to the love of my life.</strong><br />
+    Every moment with you is a beautiful memory in the making.<br />
+    Thank you for filling my world with laughter, love, and light.<br />
+    I can’t wait to celebrate many more birthdays by your side.
+  </p>
+  <p style="
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #fdd835; /* Fill color */
+  -webkit-text-stroke: 0.1px black; /* Black text border */
+  text-stroke: 0.1px black; /* Fallback for some browsers */
+  margin-top: 20px;
+">
+  💛 Happy Birthday Chlm 😘
+</p>
 
-<div class="countdown" id="countdown-text">
-  <!-- Countdown will appear here -->
+
 </div>
 
-<div class="message">
-  To the most beautiful soul, Kaviya,<br />
-  You fill every moment with joy and every day with love.<br />
-  Today, we celebrate the amazing person you are.<br />
-  Wishing you all the happiness in the world! 💖
+
+  <div class="slideshow-container">
+    <img class="slides" src="images/photo1.jpg" />
+    <img class="slides" src="images/photo2.jpg" />
+    <img class="slides" src="images/photo3.jpg" />
+    <img class="slides" src="images/photo4.jpg" />
+    <img class="slides" src="images/photo5.jpg" />
+    <img class="slides" src="images/photo6.jpg" />
+    <img class="slides" src="images/photo7.jpg" />
+    <img class="slides" src="images/photo8.jpg" />
+    <img class="slides" src="images/photo9.jpg" />
+    <img class="slides" src="images/photo10.jpg" />
+  </div>
 </div>
 
-<div class="slideshow-container">
-  <img class="slides" src="images/photo1.jpg" />
-  <img class="slides" src="images/photo2.jpg" />
-  <img class="slides" src="images/photo3.jpg" />
-</div>
-
-<div class="music">
-  <!-- Replace with actual MP3 URL -->
-  <audio controls autoplay loop>
-    <source src="music/happy.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-</div>
+<!-- 🔊 Hidden Music -->
+<audio id="bg-music" autoplay loop>
+  <source src="music/happy.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-  // Slideshow Logic
+  // 🎬 Start Button
+  document.getElementById("start-button").addEventListener("click", function () {
+    document.getElementById("welcome-screen").style.display = "none";
+    document.getElementById("main-content").style.display = "block";
+    document.getElementById("bg-music").play();
+    startHearts();
+    showCountdown();
+    showSlides();
+  });
+
+  // 🖼️ Slideshow Logic (3 seconds per image)
   let slideIndex = 0;
   const slides = document.getElementsByClassName("slides");
   function showSlides() {
-    for (let i = 0; i < slides.length; i++) slides[i].style.display = "none";
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
     slideIndex++;
     if (slideIndex > slides.length) slideIndex = 1;
     slides[slideIndex - 1].style.display = "block";
-    setTimeout(showSlides, 3000);
+    setTimeout(showSlides, 3000); // 3 seconds
   }
-  showSlides();
 
-  // Heart Animation
-  function createHeart() {
-    const heart = document.createElement('div');
-    heart.classList.add('heart');
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = Math.random() * 2 + 3 + "s";
-    document.getElementById('hearts-container').appendChild(heart);
-    setTimeout(() => heart.remove(), 5000);
+  // 💖 Falling Hearts
+  function startHearts() {
+    const container = document.getElementById("hearts-container");
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+      container.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+    setInterval(createHeart, 300);
   }
-  setInterval(createHeart, 300);
 
-  // Countdown to May 26
-  const countdownText = document.getElementById("countdown-text");
-  const birthdayDate = new Date("2025-05-26");
-  const
+  // 🗓️ Countdown
+  function showCountdown() {
+    const countdownText = document.getElementById("countdown-text");
+    const birthdayDate = new Date("2025-05-26T00:00:00");
+    const now = new Date();
+    const timeDiff = birthdayDate - now;
+    const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+    if (daysLeft > 0) {
+      countdownText.textContent = `🎈 ${daysLeft} day${daysLeft > 1 ? 's' : ''} to go until your birthday!`;
+    } else if (daysLeft === 0) {
+      countdownText.textContent = `🎉 It's your Birthday, Kaviya! 💖`;
+    } else {
+      countdownText.textContent = `🎂 Hope you had a magical birthday, Kaviya!`;
+    }
+  }
+</script>
+
+</body>
+</html>
